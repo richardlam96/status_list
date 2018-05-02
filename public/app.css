@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
 
-body {
+* {
+	border-radius: 10px;
 	font-family: 'Do Hyeon', sans-serif;
 }
 
@@ -8,67 +9,112 @@ h1 {
 	text-align: center;
 }
 
-.table {
+input {
+	opacity: .7;
+	width: 40%;
+	font-size: 1.5em;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid lightgrey;
+}
+
+input:focus {
+	opacity: 1;
+}
+
+.list {
 	margin: 0 auto;
-	display: table;
-	border-spacing: 10px;
-}
-
-.row {
-	display: table-row;
-	margin-top: 10px;
-}
-
-.cell {
-	display: table-cell;
-	margin: 5px;
 }
 
 .container {
-	text-align: center;
-	margin: 0 auto;
-	width: 60%;
+width: 50%;
+margin: 50px auto;
 }
 
-.company {
-	font-weight: bold;
+.input-fields {
+	text-align: center;
+}
+
+.item {
+border: solid lightgrey 1px;
+padding: 10px;
+overflow: hidden;
+margin: 10px auto;
+}
+
+.header {
+font-size: 1.5em;
+font-weight: bold;
 }
 
 .position {
-	font-style: italic;
+font-style: italic;
+}
+
+.detail {
+padding: 3px;
+}
+
+.column {
+float: left;
+vertical-align: top;
+height: 60px;
+box-sizing: border-box;
+}
+
+.info {
+width: 50%;
+}
+
+.options {
+width: 25%;
+}
+
+.dropdown {
+opacity: .65;
+position: relative;
+border: 1px solid lightgrey;
+padding: 10px;
+cursor: pointer;
+}
+
+.dropdown:hover {
+opacity: .9;
+}
+
+.selection {
+opacity; .95;
+display: none;
+background: white;
+border: 1px solid lightgrey;
+position: absolute;
+padding: 3px;
+width: 15%;
+z-index: 2;
+}
+
+.select {
+opacity: .85;
+text-align: center;
+display: block;
+border: 1px solid lightgrey;
+margin: 10px 5px;
+padding: 3px;
+cursor: pointer;
+}
+
+.select.delete {
+	text-transform: uppercase;
+}
+
+.select:hover {
+background: white;
+font-weight: bold;
 }
 
 .status {
-	background: gray;
-	cursor: pointer;
+width: 25%;
+background: lightgrey;
 }
 
-.status:hover {
-	opacity: 1;
-	color: white;
-}
 
-.delete:hover {
-	background: lightgrey;
-	cursor: pointer;
-}
-
-.in_progress {
-	background: grey;
-}
-
-.awaiting_response {
-	background: orange;
-}
-
-.rejected {
-	background: red;
-}
-
-.accepted {
-	background: green;
-}
-
-.color {
-	width: 200px;
-}
