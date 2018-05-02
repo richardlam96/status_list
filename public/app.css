@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+
+body {
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+.table {
+	margin: 0 auto;
+	display: table;
+	border-spacing: 10px;
+}
+
+.row {
+	display: table-row;
+	margin-top: 10px;
+}
+
+.cell {
+	display: table-cell;
+	margin: 5px;
+}
+
+.container {
+	text-align: center;
+	margin: 0 auto;
+	width: 60%;
+}
+
+.company {
+	font-weight: bold;
+}
+
+.position {
+	font-style: italic;
+}
+
+.status {
+	background: gray;
+	cursor: pointer;
+}
+
+.status:hover {
+	opacity: 1;
+	color: white;
+}
+
+.delete:hover {
+	background: lightgrey;
+	cursor: pointer;
+}
+
+.in_progress {
+	background: grey;
+}
+
+.awaiting_response {
+	background: orange;
+}
+
+.rejected {
+	background: red;
+}
+
+.accepted {
+	background: green;
+}
+
+.color {
+	width: 200px;
+}
