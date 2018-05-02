@@ -17,31 +17,54 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.table').on('click', '.delete', function(event) {
-		removeEntry($(this).parent());
+	// honestly, 'list' should be an id, so jQuery can get it easier.
+	$('.list').on('click', '.dropdown', function(event) {
+		$(this).next('.selection').toggle();
 	});
 
-	$('.table').on('click', '.status', function(event) {
-		updateEntry($(this).parent(), $(this).text());
+
+
+	$('.list').on('click', '.select', function(event) {
+		event.stopPropagation();
+		updateEntry($(this).parent().parent().parent(), $(this));
+	});
+
+	$('.list').on('click', '.select.delete', function(event) {
+		removeEntry($(this).parent().parent().parent());
 	});
 
 });
 
 function showEntry(entry) {
-	var entryDisplay = $('<div class="row">' 
-			                 + '<div class="company cell">' + entry.company + '</div>'
-											 + '<div class="position cell">' + entry.position + '</div>'
-											 + '<div class="status in_progress cell">in_progress</div>'
-											 + '<div class="status awaiting_response" cell">awaiting_response</div>'
-											 + '<div class="status rejected cell">rejected</div>'
-											 + '<div class="status accepted cell">accepted</div>'
-											 + '<div class="color cell"><p>           </p></div>'
-											 + '<span class="delete">delete</span>'
-											 + '</div>');
+	var entryDisplay = $(
+		'<div class="item">'
+		+ '<div class="info column">'
+			+ '<div class="header detail">' + entry.company + '</div>'
+			+ '<div class="position detail">' + entry.position + '</div>'
+		+ '</div>'
+		+ '<div class="options column">'
+			+ '<div class="dropdown">'
+				+ '<i class="fa fa-angle-down"></i>'
+				+ 'change status'
+			+ '</div>'
+			+ '<div class="selection">'
+				+ '<a class="select" id="in_progress">in_progress</a>'
+				+ '<a class="select" id="awaiting_response">awaiting_response</a>'
+				+ '<a class="select" id="rejected">rejected</a>'
+				+ '<a class="select" id="accepted">accepted</a>'
+				+ '<a class="select delete">delete</a>'
+			+ '</div>'
+		+ '</div>'
+		+ '<div class="status column">'
+		+ '</div>'
+	+ '</div>'
+	);
+	
+	
 	entryDisplay.data('id', entry._id);
 	entryDisplay.data('status', entry.status);
-	entryDisplay.find('.color').addClass(entry.status);
-	$('.table').append(entryDisplay);
+	changeColor(entryDisplay, entry.status);
+	$('.list').append(entryDisplay);
 }
 
 function createEntry() {
@@ -71,18 +94,34 @@ function removeEntry(entry) {
 	});
 }
 
-function updateEntry(entry, statusUpdate) {
+function updateEntry(entry, clickedLink) {
+	var newStatus = clickedLink.attr('id');
 	var oldStatus = entry.data('status');
 	$.ajax({
 		method: 'PUT',
 		url: '/api/entries/' + entry.data('id'),
-		data: {status: statusUpdate},
+		data: {status: newStatus},
 	}).then(function(updatedEntry) {
-		entry.data('status', statusUpdate);
-		entry.find('.color').removeClass(oldStatus).addClass(statusUpdate);
+		entry.data('status', newStatus);
+		changeColor(entry, newStatus);
 	}).catch(function(error) {
 		console.log(error);
 	});
 }
+
+function changeColor(entry, newStatus) {
+	var newColor;
+ 	if (newStatus == 'in_progress') {
+ 		newColor = 'lightgrey';
+ 	} else if (newStatus == 'awaiting_response') {
+ 		newColor = 'orange';
+ 	} else if (newStatus == 'rejected') {
+ 		newColor = 'red';
+ 	} else if (newStatus == 'accepted') {
+ 		newColor = 'green';
+ 	}
+ 	entry.find('.status').css('background', newColor);
+ 	entry.find('.selection').toggle();
+ }
 
 
