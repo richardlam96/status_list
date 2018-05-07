@@ -13,6 +13,7 @@ router.route('/:entryId')
 
 function getEntries(req, res) {
 	db.Entry.find().then(function(entries) {
+		entries.sort(db.statusSortKey);
 		res.json(entries);
 	}).catch(function(error) {
 		res.send(error);

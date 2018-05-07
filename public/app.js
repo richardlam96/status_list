@@ -1,10 +1,6 @@
 // since js is loaded after the html, not much need for a jquery ready
 $(document).ready(function() {
-	$.getJSON('/api/entries', function(entries) {
-		entries.forEach(function(entry) {
-			showEntry(entry);
-		});
-	});
+	showAllEntries();
 
 	$('#object-input').keypress(function(event) {
 		if (event.which == 13) {
@@ -36,6 +32,14 @@ $(document).ready(function() {
 
 });
 
+function showAllEntries() {
+	$.getJSON('/api/entries', function(entries) {
+		entries.forEach(function(entry) {
+			showEntry(entry);
+		});
+	});
+}
+
 function showEntry(entry) {
 	var entryDisplay = $(
 		'<div class="item">'
@@ -49,8 +53,8 @@ function showEntry(entry) {
 				+ 'change status'
 			+ '</div>'
 			+ '<div class="selection">'
-				+ '<a class="select" id="in_progress">in_progress</a>'
-				+ '<a class="select" id="awaiting_response">awaiting_response</a>'
+				+ '<a class="select" id="in_progress">in progress</a>'
+				+ '<a class="select" id="awaiting_response">awaiting response</a>'
 				+ '<a class="select" id="rejected">rejected</a>'
 				+ '<a class="select" id="accepted">accepted</a>'
 				+ '<a class="select delete">delete</a>'
@@ -77,7 +81,8 @@ function createEntry() {
 	}).then(function(newEntry) {
 		$('#object-input').val('');
 		$('#description-input').val('');
-		showEntry(newEntry);
+		$('.list').empty();
+		showAllEntries();
 		$('#object-input').focus();
 	}).catch(function(error) {
 		console.log(error);
@@ -103,9 +108,13 @@ function updateEntry(entry, clickedLink) {
 		url: '/api/entries/' + entry.data('id'),
 		data: {status: newStatus},
 	}).then(function(updatedEntry) {
-		entry.data('status', newStatus);
-		changeColor(entry, newStatus);
-		entry.find('.selection').toggle();
+		$('.list').empty();
+		showAllEntries();
+		$('#object-input').focus();
+
+		// entry.data('status', newStatus);
+		// changeColor(entry, newStatus);
+		// entry.find('.selection').toggle();
 	}).catch(function(error) {
 		console.log(error);
 	});

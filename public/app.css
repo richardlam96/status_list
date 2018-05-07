@@ -90,7 +90,7 @@ input:focus {
 	background: white;
 	border: 1px solid lightgrey;
 	padding: 3px;
-	width: 15%;
+	width: 100%;
 	min-width: 150px;
 }
 
