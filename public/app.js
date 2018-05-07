@@ -1,3 +1,4 @@
+// since js is loaded after the html, not much need for a jquery ready
 $(document).ready(function() {
 	$.getJSON('/api/entries', function(entries) {
 		entries.forEach(function(entry) {
@@ -5,21 +6,21 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#company-input').keypress(function(event) {
+	$('#object-input').keypress(function(event) {
 		if (event.which == 13) {
 			$(this).next('input').focus();
 		}
 	});
 
-	$('#position-input').keypress(function(event) {
+	$('#description-input').keypress(function(event) {
 		if (event.which == 13) {
 			createEntry();
 		}
 	});
 
 	// honestly, 'list' should be an id, so jQuery can get it easier.
-	$('.list').on('click', '.dropdown', function(event) {
-		$(this).next('.selection').toggle();
+	$('.list').on('click', '.options', function(event) {
+		$(this).find('.selection').toggle();
 	});
 
 
@@ -68,16 +69,16 @@ function showEntry(entry) {
 }
 
 function createEntry() {
-	var companyName = $('#company-input').val();
-	var positionName = $('#position-input').val();
+	var objectName = $('#object-input').val();
+	var descriptionName = $('#description-input').val();
 	$.post('/api/entries', {
-		company: companyName,
-		position: positionName,
+		company: objectName,
+		position: descriptionName,
 	}).then(function(newEntry) {
-		$('#company-input').val('');
-		$('#position-input').val('');
+		$('#object-input').val('');
+		$('#description-input').val('');
 		showEntry(newEntry);
-		$('#company-input').focus();
+		$('#object-input').focus();
 	}).catch(function(error) {
 		console.log(error);
 	});
@@ -104,6 +105,7 @@ function updateEntry(entry, clickedLink) {
 	}).then(function(updatedEntry) {
 		entry.data('status', newStatus);
 		changeColor(entry, newStatus);
+		entry.find('.selection').toggle();
 	}).catch(function(error) {
 		console.log(error);
 	});
@@ -121,7 +123,6 @@ function changeColor(entry, newStatus) {
  		newColor = 'green';
  	}
  	entry.find('.status').css('background', newColor);
- 	entry.find('.selection').toggle();
  }
 
 
