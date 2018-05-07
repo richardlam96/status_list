@@ -27,8 +27,9 @@ input:focus {
 }
 
 .container {
-width: 50%;
-margin: 50px auto;
+	width: 50%;
+	min-width: 320px;
+	margin: 50px auto;
 }
 
 .input-fields {
@@ -36,71 +37,71 @@ margin: 50px auto;
 }
 
 .item {
-border: solid lightgrey 1px;
-padding: 10px;
-overflow: hidden;
-margin: 10px auto;
+	border: solid lightgrey 1px;
+	padding: 10px;
+	overflow: hidden;
+	margin: 10px auto;
 }
 
 .header {
-font-size: 1.5em;
-font-weight: bold;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 .position {
-font-style: italic;
+	font-style: italic;
 }
 
 .detail {
-padding: 3px;
+	padding: 3px;
 }
 
 .column {
-float: left;
-vertical-align: top;
-height: 60px;
-box-sizing: border-box;
+	float: left;
+	vertical-align: top;
+	height: 60px;
+	box-sizing: border-box;
 }
 
 .info {
-width: 50%;
+	width: 50%;
 }
 
 .options {
-width: 25%;
+	width: 25%;
+	height: 100%;
+	border: 1px solid lightgrey;
 }
 
 .dropdown {
-opacity: .65;
-position: relative;
-border: 1px solid lightgrey;
-padding: 10px;
-cursor: pointer;
+	opacity: .65;
+	position: relative;
+	padding: 10px;
+	cursor: pointer;
 }
 
 .dropdown:hover {
-opacity: .9;
+	opacity: .9;
 }
 
 .selection {
-opacity; .95;
-display: none;
-background: white;
-border: 1px solid lightgrey;
-position: absolute;
-padding: 3px;
-width: 15%;
-z-index: 2;
+	opacity; .95;
+	display: none;
+	background: white;
+	border: 1px solid lightgrey;
+	padding: 3px;
+	width: 15%;
+	min-width: 150px;
 }
 
 .select {
-opacity: .85;
-text-align: center;
-display: block;
-border: 1px solid lightgrey;
-margin: 10px 5px;
-padding: 3px;
-cursor: pointer;
+	opacity: .85;
+	text-align: center;
+	display: block;
+	border: 1px solid lightgrey;
+	margin: 10px 5px;
+	padding: 3px;
+	cursor: pointer;
 }
 
 .select.delete {
@@ -108,13 +109,13 @@ cursor: pointer;
 }
 
 .select:hover {
-background: white;
-font-weight: bold;
+	background: white;
+	font-weight: bold;
 }
 
 .status {
-width: 25%;
-background: lightgrey;
+	width: 25%;
+	background: lightgrey;
 }
 
 
