@@ -14,12 +14,16 @@ $(document).ready(function() {
 		}
 	});
 
-	// honestly, 'list' should be an id, so jQuery can get it easier.
+	// honestly, 'list' should be an id, so jQuery can get it easier?
 	$('.list').on('click', '.options', function(event) {
+		event.stopPropagation();
+		$('.selection').hide();
 		$(this).find('.selection').toggle();
 	});
 
-
+	$(document).on('click', function(event) {
+		$('.selection').hide();
+	});
 
 	$('.list').on('click', '.select', function(event) {
 		event.stopPropagation();
