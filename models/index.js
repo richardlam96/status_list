@@ -5,8 +5,7 @@ mongoose.set('debug', true);
 
 
 
-process.env.databaseUrl = 'mongodb://richard:richy123@ds157631.mlab.com:57631/status_list';
-mongoose.connect(process.env.databaseUrl);
+mongoose.connect('mongodb://richard:richy123@ds157631.mlab.com:57631/status_list');
 
 mongoose.Promise = Promise;
 
