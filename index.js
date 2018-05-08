@@ -16,6 +16,6 @@ app.get('/', function(req, res) {
 	res.sendFile('index.html');
 });
 
-app.listen(process.env.PORT || 3000, 'localhost', function() {
+app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function() {
 	console.log('Job Search Log started.');
 });
