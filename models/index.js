@@ -1,11 +1,7 @@
 var mongoose = require('mongoose');
 mongoose.set('debug', true);
 
-// mongoose.connect('mongodb://localhost/job_search_api');
-
-
-
-mongoose.connect('mongodb://richard:richy123@ds157631.mlab.com:57631/status_list');
+mongoose.connect(process.env.DATABASE_URL);
 
 mongoose.Promise = Promise;
 
