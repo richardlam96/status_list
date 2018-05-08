@@ -23,20 +23,18 @@ $(document).ready(function() {
 
 	$('.list').on('click', '.select', function(event) {
 		event.stopPropagation();
-		updateEntry($(this).parent().parent().parent(), $(this));
+		updateEntry($(this).closest('.item'), $(this));
 	});
 
 	$('.list').on('click', '.select.delete', function(event) {
-		removeEntry($(this).parent().parent().parent());
+		removeEntry($(this).closest('.item'));
 	});
 
 });
 
 function showAllEntries() {
 	$.getJSON('/api/entries', function(entries) {
-		entries.forEach(function(entry) {
-			showEntry(entry);
-		});
+		entries.forEach(entry => showEntry(entry));
 	});
 }
 
@@ -78,13 +76,13 @@ function createEntry() {
 	$.post('/api/entries', {
 		company: objectName,
 		position: descriptionName,
-	}).then(function(newEntry) {
+	}).then((newEntry) => {
 		$('#object-input').val('');
 		$('#description-input').val('');
 		$('.list').empty();
 		showAllEntries();
 		$('#object-input').focus();
-	}).catch(function(error) {
+	}).catch((error) => {
 		console.log(error);
 	});
 }
@@ -93,9 +91,9 @@ function removeEntry(entry) {
 	$.ajax({
 		method: 'DELETE',
 		url: '/api/entries/' + entry.data('id'),
-	}).then(function(data) {
+	}).then((data) => {
 		entry.remove();
-	}).catch(function(error) {
+	}).catch((error) => {
 		console.log(error);
 	});
 }
@@ -107,7 +105,7 @@ function updateEntry(entry, clickedLink) {
 		method: 'PUT',
 		url: '/api/entries/' + entry.data('id'),
 		data: {status: newStatus},
-	}).then(function(updatedEntry) {
+	}).then((updatedEntry) => {
 		$('.list').empty();
 		showAllEntries();
 		$('#object-input').focus();
@@ -115,7 +113,7 @@ function updateEntry(entry, clickedLink) {
 		// entry.data('status', newStatus);
 		// changeColor(entry, newStatus);
 		// entry.find('.selection').toggle();
-	}).catch(function(error) {
+	}).catch((error) => {
 		console.log(error);
 	});
 }
